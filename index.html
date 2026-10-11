@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance System</title>
+</head>
+<body>
+    <h1>Student Attendance Management System</h1>
+    <p>Manage Student Attendance Easily</p>
+
+    <h2>Add Student</h2>
+    <input id="studentName" placeholder="Student Name">
+    <input id="rollNumber" placeholder="Roll Number">
+    <button onclick="addStudent()">Add Student</button>
+
+    <h2>Student List</h2>
+    <div id="studentList"></div>
+
+    <h2>Attendance Report</h2>
+    <p>Total Students: <span id="totalStudents">0</span></p>
+    <p>Present: <span id="presentCount">0</span></p>
+    <p>Absent: <span id="absentCount">0</span></p>
+    <p>Attendance: <span id="percentage">0%</span></p>
+
+    <script src="Script.js"></script>
+</body>
+</html>
