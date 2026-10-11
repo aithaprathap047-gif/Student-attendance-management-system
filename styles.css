@@ -1,0 +1,45 @@
+body {
+font-family: Arial, sans-serif;
+text-align: center;
+margin: 0;
+padding: 40px;
+background: #f2f5f9;
+}
+
+h1 {
+color: #1f3c88;
+margin-top: 50px;
+}
+
+p {
+font-size: 18px;
+color: #555;
+}
+.dashboard {
+background: white;
+max-width: 500px;
+margin: 25px auto;
+padding: 25px;
+border-radius: 12px;
+box-shadow: 0 4px 12px #cccccc;
+}
+
+input {
+padding: 10px;
+margin: 8px;
+border: 1px solid #cccccc;
+border-radius: 6px;
+}
+
+button {
+padding: 10px 15px;
+margin: 5px;
+background: #1f3c88;
+color: white;
+border: none;
+border-radius: 6px;
+}
+
+button:active {
+background: #142858;
+}
