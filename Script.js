@@ -1,3 +1,4 @@
+
 let students = JSON.parse(localStorage.getItem("students")) || [];
 
 function saveStudents() {
@@ -8,12 +9,16 @@ function addStudent() {
     const name = document.getElementById("studentName").value.trim();
     const roll = document.getElementById("rollNumber").value.trim();
 
-    if (name === "" || roll === "") {
+    if (!name || !roll) {
         alert("Please enter student name and roll number!");
         return;
     }
 
-    if (students.some(student => student.roll === roll)) {
+    const duplicate = students.some(
+        student => student.roll.toLowerCase() === roll.toLowerCase()
+    );
+
+    if (duplicate) {
         alert("Roll number already exists!");
         return;
     }
@@ -35,9 +40,22 @@ function addStudent() {
 
 function displayStudents() {
     const list = document.getElementById("studentList");
+    const searchBox = document.getElementById("studentSearch");
+    const query = searchBox ? searchBox.value.trim().toLowerCase() : "";
+
     list.innerHTML = "";
 
+    let found = 0;
+
     students.forEach(function(student, index) {
+        const matches =
+            student.name.toLowerCase().includes(query) ||
+            student.roll.toLowerCase().includes(query);
+
+        if (!matches) return;
+
+        found++;
+
         const item = document.createElement("div");
         item.className = "dashboard";
 
@@ -68,15 +86,23 @@ function displayStudents() {
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
         deleteBtn.onclick = function() {
-            students.splice(index, 1);
-            saveStudents();
-            displayStudents();
-            updateReport();
+            if (confirm("Delete this student?")) {
+                students.splice(index, 1);
+                saveStudents();
+                displayStudents();
+                updateReport();
+            }
         };
         item.appendChild(deleteBtn);
 
         list.appendChild(item);
     });
+
+    if (found === 0) {
+        list.textContent = query
+            ? "No matching students found."
+            : "No students added yet.";
+    }
 }
 
 function markAttendance(index, status) {
@@ -105,6 +131,12 @@ function updateReport() {
     document.getElementById("presentCount").textContent = present;
     document.getElementById("absentCount").textContent = absent;
     document.getElementById("percentage").textContent = percentage + "%";
+}
+
+const searchBox = document.getElementById("studentSearch");
+
+if (searchBox) {
+    searchBox.addEventListener("input", displayStudents);
 }
 
 displayStudents();
